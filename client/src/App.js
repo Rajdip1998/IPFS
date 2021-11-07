@@ -2,10 +2,6 @@ import React, { Component } from 'react'
 import SimpleStorageContract from './contracts/SimpleStorage.json'
 import getWeb3 from './getWeb3'
 import ipfs from './ipfs'
-
-// import './css/oswald.css'
-// import './css/open-sans.css'
-// import './css/pure-min.css'
 import './App.css'
 
 class App extends Component {

@@ -1,3 +1,4 @@
+
 import Web3 from 'web3'
 
 let getWeb3 = new Promise(function(resolve, reject) {
