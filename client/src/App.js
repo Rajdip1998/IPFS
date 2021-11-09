@@ -18,7 +18,7 @@ class App extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     // Get network provider and web3 instance.
     // See utils/getWeb3 for more info.
 
@@ -45,16 +45,16 @@ class App extends Component {
      */
 
     const contract = require('truffle-contract')
-    const simpleStorage = contract(SimpleStorageContract)
-    simpleStorage.setProvider(this.state.web3.currentProvider)
+    const SimpleStorage = contract(SimpleStorageContract)
+    SimpleStorage.setProvider(this.state.web3.currentProvider)
 
     // Get accounts.
     this.state.web3.eth.getAccounts((error, accounts) => {
-      simpleStorage.deployed().then((instance) => {
-        this.simpleStorageInstance = instance
+      SimpleStorage.deployed().then((instance) => {
+        this.SimpleStorageInstance = instance
         this.setState({ account: accounts[0] })
         // Get the value from the contract to prove it worked.
-        return this.simpleStorageInstance.get.call(accounts[0])
+        return this.SimpleStorageInstance.get.call(accounts[0])
       }).then((ipfsHash) => {
         // Update state with the result.
         return this.setState({ ipfsHash })
@@ -80,8 +80,8 @@ class App extends Component {
         console.error(error)
         return
       }
-      this.simpleStorageInstance.set(result[0].hash, { from: this.state.account }).then((r) => {
-        return this.setState({ ipfsHash: result[0].hash })
+      this.SimpleStorageInstance.set(result[0].hash, { from: this.state.account }).then((r) => {
+        return this.setState({ ipfsHash:result[0].hash })
         // console.log('ipfsHash', this.state.ipfsHash)
       })
     })
